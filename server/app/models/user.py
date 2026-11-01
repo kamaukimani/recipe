@@ -6,7 +6,7 @@ from app.db import db
 class User(db.Model,SerializerMixin):
     __tablename__="users"
 
-    serialize_rules=("-",)
+    serialize_rules=("-recipes.user",)
     
     id:Mapped[int]=mapped_column(primary_key=True)
     username:Mapped[str]=mapped_column(unique=True)
