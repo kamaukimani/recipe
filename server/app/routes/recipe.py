@@ -7,7 +7,7 @@ class RecipeIndex(Resource):
     def get(self):
 
         if session.get("user_id"):
-            recipes=[recipe.to_dict() for recipe in Recipe.query.all()]
+            recipes=[recipe.to_dict(rules=("-user.password","-user.recipes",)) for recipe in Recipe.query.all()]
 
             return make_response(recipes,200)
             
