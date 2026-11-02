@@ -7,7 +7,7 @@ from sqlalchemy import ForeignKey
 class Recipe(db.Model,SerializerMixin):
     __tablename__= "recipes"
 
-    serialize_rules=("-",)
+    serialize_rules=("-user.articles",)
 
     id:Mapped[int]=mapped_column(primary_key=True)
     title:Mapped[str]
@@ -17,3 +17,7 @@ class Recipe(db.Model,SerializerMixin):
     user_id:Mapped[int]=mapped_column(ForeignKey("users.id"))
 
     user:Mapped["User"] = relationship(back_populates="recipes")
+
+
+    def __repr__(self):
+        return f"<Recipe  {self.id}  {self.title}>"
