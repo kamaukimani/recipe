@@ -73,3 +73,9 @@ class CheckSession(Resource):
             response = user.to_dict(rules=("-password",))
             return make_response(response,200)
         return {"message":"Unauthorized"},401
+
+class Logout(Resource):
+    def delete(self):
+        session["user_id"]=None 
+
+        return {},204
