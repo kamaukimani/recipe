@@ -24,6 +24,7 @@ const GlobalStyle = createGlobalStyle`
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+      <GlobalStyle />
       <App />
     </BrowserRouter>
   </StrictMode>,
