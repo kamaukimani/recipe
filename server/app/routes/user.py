@@ -63,3 +63,13 @@ class Login(Resource):
             return {"message":"Invalid username or password"},401
 
         return {"message":"Provide username and password"},401
+
+
+class CheckSession(Resource):
+    def get(self):
+        if session.get("user_id"):
+            user=User.query.filter_by(id = session["user_id"]).first()
+
+            response = user.to_dict(rules=("-password",))
+            return make_response(response,200)
+        return {"message":"Unauthorized"},401
