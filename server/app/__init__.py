@@ -18,5 +18,6 @@ def create_app():
     api=Api(app)
 
     api.add_resource(Signup,'/signup',endpoint="signup")
+    api.add_resource(Login,'/login',endpoint='login')
 
     return app
