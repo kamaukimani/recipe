@@ -29,6 +29,9 @@ def create_app():
     def check_if_logged_in():
         open_access_list=['signup','login','check_session']
 
+        if request.method == "OPTIONS":
+            return None
+
         if (request.endpoint) not in open_access_list and (not session.get("user_id")):
 
             return {"message":"Unauthorized"},401
