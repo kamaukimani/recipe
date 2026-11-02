@@ -1,2 +1,2 @@
 from .user import *
-from .article import *
+from .recipe import *
