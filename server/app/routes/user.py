@@ -36,3 +36,30 @@ class Signup(Resource):
                 return make_response(response,201)
             return {"message":"Username already exists"},401
         return {"message":"Provide data for all fields"},422
+
+class Login(Resource):
+    def post(self):
+        data=request.get_json()
+        username=data.get("username")
+        #password=data["password"]
+        password=data.get("password")
+
+        if username and password:
+            user=User.query.filter_by(username = username).first()
+            if user:
+
+                check_password=bcrypt.check_password_hash(user.password,password)
+
+                if check_password:
+
+                    session["user_id"] = user.id 
+
+                    response = user.to_dict(rules=("-password",))
+
+                    return make_response(response,200)
+
+                return {"message":"Invalid username or password"},401
+
+            return {"message":"Invalid username or password"},401
+
+        return {"message":"Provide username and password"},401
